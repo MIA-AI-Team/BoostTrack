@@ -5,3 +5,4 @@ deepOCenv/
 **/__pycache__/
 /cache/
 /results/trackers
+/external/fast_reid/datasets/

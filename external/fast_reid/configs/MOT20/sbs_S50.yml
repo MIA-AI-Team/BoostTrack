@@ -3,9 +3,10 @@ _BASE_: ../Base-SBS.yml
 MODEL:
   BACKBONE:
     NAME: build_resnest_backbone
+  WEIGHTS: /home/moustafa/Me/MIA/BoostTrack/external/weights/mot17_sbs_S50.pth
 
 DATASETS:
   NAMES: ("MOT20",)
   TESTS: ("MOT20",)
 
-OUTPUT_DIR: logs/MOT20/sbs_S50
+OUTPUT_DIR: fast_reid/logs/MOT20/sbs_S50
