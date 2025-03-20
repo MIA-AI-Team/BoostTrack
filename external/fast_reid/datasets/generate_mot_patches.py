@@ -54,7 +54,7 @@ def main(args):
     os.makedirs(test_save_path, exist_ok=True)
 
     # Get gt data
-    data_path = os.path.join(args.data_path, str(args.dataset), 'train')
+    data_path = os.path.join(args.data_path, 'train')
 
     if args.dataset == 'MOT17':
         seqs = [f for f in os.listdir(data_path) if 'FRCNN' in f]
