@@ -3,7 +3,7 @@ _BASE_: ../Base-SBS.yml
 MODEL:
   BACKBONE:
     NAME: build_resnest_backbone
-  WEIGHTS: /home/moustafa/Me/MIA/BoostTrack/external/weights/mot17_sbs_S50.pth
+  WEIGHTS: /kaggle/working/BoostTrack/external/mot17_sbs_S50.pth
 
 DATASETS:
   NAMES: ("MOT20",)
