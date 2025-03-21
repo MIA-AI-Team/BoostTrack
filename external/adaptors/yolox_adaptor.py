@@ -48,6 +48,8 @@ class Exp:
         self.num_classes = 1
         self.depth = 1.33
         self.width = 1.25
+        # self.depth = 0.67
+        # self.width = 0.75
         if dataset == "mot17" or dataset == "dance":
             self.input_size = (800, 1440)
             self.test_size = (800, 1440)
