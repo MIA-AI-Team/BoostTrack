@@ -75,7 +75,6 @@ class MOT20(ImageDataset):
 
         data = []
         for img_path in img_paths:
-            print(img_path)
             pid, camid = map(int, pattern.search(img_path).groups())
             if pid == -1:
                 continue  # junk images are just ignored
