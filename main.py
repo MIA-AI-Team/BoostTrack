@@ -74,6 +74,7 @@ def main():
     results = {}
     frame_count = 0
     total_time = 0
+    pred_arr = []
     # See __getitem__ of dataset.MOTDataset
     for (img, np_img), label, info, idx in loader:
         # Frame info
@@ -102,58 +103,62 @@ def main():
         pred = det(img, tag)
         start_time = time.time()
 
+        pred_arr.append(pred)
         if pred is None:
             continue
-        # Nx5 of (x1, y1, x2, y2, ID)
-        targets = tracker.update(pred, img, np_img[0].numpy(), tag)
-        tlwhs, ids, confs = utils.filter_targets(targets, GeneralSettings['aspect_ratio_thresh'], GeneralSettings['min_box_area'])
+    
+    return pred_arr
+    #     # Nx5 of (x1, y1, x2, y2, ID)
+    #     targets = tracker.update(pred, img, np_img[0].numpy(), tag)
+    #     tlwhs, ids, confs = utils.filter_targets(targets, GeneralSettings['aspect_ratio_thresh'], GeneralSettings['min_box_area'])
 
-        total_time += time.time() - start_time
-        frame_count += 1
+    #     total_time += time.time() - start_time
+    #     frame_count += 1
 
-        results[video_name].append((frame_id, tlwhs, ids, confs))
+    #     results[video_name].append((frame_id, tlwhs, ids, confs))
 
-    print(f"Time spent: {total_time:.3f}, FPS {frame_count / (total_time + 1e-9):.2f}")
-    print(total_time)
-    # Save detector results
-    det.dump_cache()
-    tracker.dump_cache()
-    # Save for all sequences
-    folder = os.path.join(args.result_folder, args.exp_name, "data")
-    os.makedirs(folder, exist_ok=True)
-    for name, res in results.items():
-        result_filename = os.path.join(folder, f"{name}.txt")
-        utils.write_results_no_score(result_filename, res)
-    print(f"Finished, results saved to {folder}")
-    if not args.no_post:
-        post_folder = os.path.join(args.result_folder, args.exp_name + "_post")
-        pre_folder = os.path.join(args.result_folder, args.exp_name)
-        if os.path.exists(post_folder):
-            print(f"Overwriting previous results in {post_folder}")
-            shutil.rmtree(post_folder)
-        shutil.copytree(pre_folder, post_folder)
-        post_folder_data = os.path.join(post_folder, "data")
-        interval = 1000  # i.e. no max interval
-        utils.dti(post_folder_data, post_folder_data, n_dti=interval, n_min=25)
+    # print(f"Time spent: {total_time:.3f}, FPS {frame_count / (total_time + 1e-9):.2f}")
+    # print(total_time)
+    # # Save detector results
+    # det.dump_cache()
+    # tracker.dump_cache()
+    # # Save for all sequences
+    # folder = os.path.join(args.result_folder, args.exp_name, "data")
+    # os.makedirs(folder, exist_ok=True)
+    # for name, res in results.items():
+    #     result_filename = os.path.join(folder, f"{name}.txt")
+    #     utils.write_results_no_score(result_filename, res)
+    # print(f"Finished, results saved to {folder}")
+    # if not args.no_post:
+    #     post_folder = os.path.join(args.result_folder, args.exp_name + "_post")
+    #     pre_folder = os.path.join(args.result_folder, args.exp_name)
+    #     if os.path.exists(post_folder):
+    #         print(f"Overwriting previous results in {post_folder}")
+    #         shutil.rmtree(post_folder)
+    #     shutil.copytree(pre_folder, post_folder)
+    #     post_folder_data = os.path.join(post_folder, "data")
+    #     interval = 1000  # i.e. no max interval
+    #     utils.dti(post_folder_data, post_folder_data, n_dti=interval, n_min=25)
 
-        print(f"Linear interpolation post-processing applied, saved to {post_folder_data}.")
+    #     print(f"Linear interpolation post-processing applied, saved to {post_folder_data}.")
 
-        res_folder = os.path.join(args.result_folder, args.exp_name, "data")
-        post_folder_gbi = os.path.join(args.result_folder, args.exp_name + "_post_gbi", "data")
+    #     res_folder = os.path.join(args.result_folder, args.exp_name, "data")
+    #     post_folder_gbi = os.path.join(args.result_folder, args.exp_name + "_post_gbi", "data")
 
-        if not os.path.exists(post_folder_gbi):
-            os.makedirs(post_folder_gbi)
-        for file_name in os.listdir(res_folder):
-            in_path = os.path.join(post_folder_data, file_name)
-            out_path2 = os.path.join(post_folder_gbi, file_name)
+    #     if not os.path.exists(post_folder_gbi):
+    #         os.makedirs(post_folder_gbi)
+    #     for file_name in os.listdir(res_folder):
+    #         in_path = os.path.join(post_folder_data, file_name)
+    #         out_path2 = os.path.join(post_folder_gbi, file_name)
 
-            GBInterpolation(
-                path_in=in_path,
-                path_out=out_path2,
-                interval=interval
-            )
-        print(f"Gradient boosting interpolation post-processing applied, saved to {post_folder_gbi}.")
+    #         GBInterpolation(
+    #             path_in=in_path,
+    #             path_out=out_path2,
+    #             interval=interval
+    #         )
+    #     print(f"Gradient boosting interpolation post-processing applied, saved to {post_folder_gbi}.")
 
 
 if __name__ == "__main__":
-    main()
+    pred_arr = main()
+    print(pred_arr.size)
