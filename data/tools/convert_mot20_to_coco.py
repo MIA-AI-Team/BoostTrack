@@ -5,7 +5,7 @@ import cv2
 
 
 # Use the same script for MOT16
-DATA_PATH = "data/MOT20"
+DATA_PATH = "/kaggle/working/BoostTrack/data/MOT20"
 OUT_PATH = os.path.join(DATA_PATH, "annotations")
 SPLITS = [
     "train_half",
