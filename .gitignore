@@ -6,3 +6,4 @@ deepOCenv/
 /cache/
 /results/trackers
 /external/fast_reid/datasets/
+**/logs/

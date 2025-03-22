@@ -27,24 +27,24 @@ class MOT20(ImageDataset):
         - images: ?
     """
     _junk_pids = [0, -1]
-    dataset_dir = 'MOT20'
+    dataset_dir = 'mot-fast-reid'
     dataset_url = ''  # 'https://motchallenge.net/data/MOT20.zip'
     dataset_name = "MOT20"
 
-    def __init__(self, root='datasets', **kwargs):
+    def __init__(self, root='/kaggle/input', **kwargs):
         # self.root = osp.abspath(osp.expanduser(root))
         self.root = root
         self.dataset_dir = osp.join(self.root, self.dataset_dir)
 
         # allow alternative directory structure
         self.data_dir = self.dataset_dir
-        data_dir = osp.join(self.data_dir, 'MOT20-ReID')
-        if osp.isdir(data_dir):
-            self.data_dir = data_dir
-        else:
-            warnings.warn('The current data structure is deprecated. Please '
-                          'put data folders such as "bounding_box_train" under '
-                          '"MOT20-ReID".')
+        # data_dir = osp.join(self.data_dir, 'MOT20-ReID')
+        # if osp.isdir(data_dir):
+            # self.data_dir = data_dir
+        # else:
+            # warnings.warn('The current data structure is deprecated. Please '
+                        #   'put data folders such as "bounding_box_train" under '
+                        #   '"MOT20-ReID".')
 
         self.train_dir = osp.join(self.data_dir, 'bounding_box_train')
         self.query_dir = osp.join(self.data_dir, 'query')
