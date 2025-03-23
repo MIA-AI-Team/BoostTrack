@@ -12,7 +12,7 @@ def get_detector_path_and_im_size(args) -> Tuple[str, Tuple[int, int]]:
         size = (800, 1440)
     elif args.dataset == "mot20":
         if args.detector == "yoloV11":
-            detector_path = "external/weights/last_80ep.pt"
+            detector_path = "external/weights/yoloV12_8ep.pt"
             size = (800, 1440)
         elif args.test_dataset:
             detector_path = "external/weights/mot17x_finetuned.pth.tar"
