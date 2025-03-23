@@ -9,4 +9,4 @@ DATASETS:
   NAMES: ("MOT20",)
   TESTS: ("MOT20",)
 
-OUTPUT_DIR: /content/drive/Shareddrives/MyPrivateDrive/logs/MOT20
+OUTPUT_DIR: "/content/drive/Shareddrives/MIA AI/logs/MOT20"
