@@ -170,7 +170,7 @@ class EmbeddingComputer:
                 return self._get_general_model()
         elif self.dataset == "mot20":
             if self.test_dataset:
-                path = "external/weights/emb_ep4.pth"
+                path = "/kaggle/input/fastreid-mot20-finetuned/pytorch/0epoch/2/emb_ep4.pth"
             else:
                 return self._get_general_model()
         elif self.dataset == "dance":
