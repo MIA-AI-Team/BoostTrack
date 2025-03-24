@@ -27,7 +27,7 @@ class MOT20(ImageDataset):
         - images: ?
     """
     _junk_pids = [0, -1]
-    dataset_dir = 'mot-fast-reid'
+    dataset_dir = 'mot20-fastreid-dataset'
     dataset_url = ''  # 'https://motchallenge.net/data/MOT20.zip'
     dataset_name = "MOT20"
 
