@@ -30,7 +30,7 @@ def objective(trial):
         --detector "yolox"
     """
 
-    mv = f"""mv results/trackers/MOT20-val/* results/trackers/MOT20-test/"""
+    mv = f"""mv /kaggle/working/BoostTrack/results/trackers/MOT20-val/* /kaggle/working/BoostTrack/results/trackers/MOT20-test/"""
 
     print(f"Running trial {trial.number} with params: {params}")
     
@@ -40,7 +40,7 @@ def objective(trial):
     subprocess.run(mv, shell=True)
 
     # Evaluate performance
-    eval_cmd = f"""python external/TrackEval/scripts/run_mot_challenge.py \
+    eval_cmd = f"""python /kaggle/working/BoostTrack/external/TrackEval/scripts/run_mot_challenge.py \
         --SPLIT_TO_EVAL test --GT_FOLDER results/gt/ \
         --TRACKERS_FOLDER results/trackers/ --BENCHMARK MOT20 \
         --TRACKERS_TO_EVAL {trial.number}_post_gbi
