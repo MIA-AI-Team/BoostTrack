@@ -15,7 +15,7 @@ def get_detector_path_and_im_size(args) -> Tuple[str, Tuple[int, int]]:
             detector_path = "external/weights/yoloV12_30ep_b.pt"
             size = (800, 1440)
         elif args.test_dataset:
-            detector_path = "external/weights/mot17x_finetuned.pth.tar"
+            detector_path = "kaggle/input/mot-20-model-only-best/pytorch/default/1/best_ckpt.pth.tar"
             size = (896, 1600)
         else:
             # Just use the mot17 test model as the ablation model for 20
