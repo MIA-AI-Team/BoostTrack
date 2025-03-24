@@ -1,6 +1,7 @@
 import optuna
 import subprocess
 import shutil
+import re
 
 # Define the objective function
 def objective(trial):
@@ -49,20 +50,23 @@ def objective(trial):
         --TRACKERS_TO_EVAL {trial.number}_post_gbi
     """
     process = subprocess.run(eval_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    output_lines = process.stdout.split("\n")
-    if len(output_lines) >= 13:
-        hota_line = output_lines[-13].split()
-        if len(hota_line) > 1:
-            hota_score = hota_line[1]  # Extract the first score field
+    output_lines = [line.strip() for line in process.stdout.split("\n") if line.strip()]
+
+    if len(output_lines) >= 12:
+        hota_line = output_lines[-12]
+        
+        # Remove all spaces within the line
+        hota_line_no_spaces = re.sub(r"\s+", "", hota_line)
+        
+        # Extract the second word (HOTA score) before spaces were removed
+        hota_words = hota_line.split()
+        if len(hota_words) > 1:
+            hota_score = hota_words[1].replace(" ", "")  # Remove spaces within the score
             print("HOTA Score:", hota_score)
         else:
             print("Error: Unexpected format in HOTA line.")
     else:
         print("Error: Output does not have enough lines.")
-    # Read HOTA score
-    # with open(f"results/trackers/MOT20-test/{trial.number}_post_gbi/pedestrian_summary.txt", "r") as file:
-        # last_line = file.readlines()[-1].strip()
-        # hota_score = float(last_line.split()[0])  # Extract first number (HOTA)
 
     print(f"Trial {trial.number} - HOTA Score: {hota_score}")
     return hota_score
