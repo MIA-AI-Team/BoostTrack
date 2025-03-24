@@ -60,7 +60,7 @@ study = optuna.create_study(direction="maximize")
 
 study.enqueue_trial({
     "min_hits": 5,  
-    "min_box_area": 59,  
+    "min_box_area": 60,  
     "max_age": 20,  
     "det_thresh": 0.3,  
     "iou_threshold": 0.1,  
@@ -70,7 +70,7 @@ study.enqueue_trial({
     "dlo_boost_coef": 0.7  
 })
 
-study.optimize(objective, n_trials=30)
+study.optimize(objective, n_trials=70)
 
 print(f"Best HOTA Score: {study.best_value}")
 print(f"Best Parameters: {study.best_params}")
