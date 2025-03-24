@@ -48,7 +48,7 @@ def objective(trial):
     subprocess.run(eval_cmd, shell=True)
 
     # Read HOTA score
-    with open(f"results/trackers/MOT20-test/{trial.number}_post_gbi/pedestrian_summary.txt", "r") as file:
+    with open(f"/kaggle/working/BoostTrack/results/trackers/MOT20-test/{trial.number}_post_gbi/pedestrian_summary.txt", "r") as file:
         last_line = file.readlines()[-1].strip()
         hota_score = float(last_line.split()[0])  # Extract first number (HOTA)
 
