@@ -5,7 +5,6 @@ import torch
 import cv2
 import numpy as np
 from pycocotools.coco import COCO
-from torchvision import transforms
 from yolox.data import ValTransform
 
 def get_mot_loader(dataset, test, data_dir="data", workers=4, size=(800, 1440)):
