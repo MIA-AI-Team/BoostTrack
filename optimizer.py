@@ -58,18 +58,6 @@ def objective(trial):
 # Run Bayesian Optimization
 study = optuna.create_study(direction="maximize")
 
-study.enqueue_trial({
-    "min_hits": 5,  
-    "min_box_area": 60,  
-    "max_age": 20,  
-    "det_thresh": 0.3,  
-    "iou_threshold": 0.1,  
-    "lambda_iou": 0.9,  
-    "lambda_mhd": 0.4,  
-    "lambda_shape": 0.3,  
-    "dlo_boost_coef": 0.7  
-})
-
 study.optimize(objective, n_trials=70)
 
 print(f"Best HOTA Score: {study.best_value}")
