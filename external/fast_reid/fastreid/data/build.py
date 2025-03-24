@@ -26,8 +26,8 @@ __all__ = [
 ]
 
 # _root = os.getenv("FASTREID_DATASETS", "datasets")
-# _root = os.getenv("FASTREID_DATASETS", "kaggle/input")
-_root = "/kaggle/input"
+_root = os.getenv("FASTREID_DATASETS", "kaggle/input")
+# _root = "/kaggle/input"
 
 def _train_loader_from_config(cfg, *, train_set=None, transforms=None, sampler=None, **kwargs):
 
