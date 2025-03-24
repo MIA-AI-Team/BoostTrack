@@ -53,21 +53,23 @@ def objective(trial):
     output_lines = [line.strip() for line in process.stdout.split("\n") if line.strip()]
 
     if len(output_lines) >= 12:
-        hota_line = output_lines[-12]
-        
-        # Remove all spaces within the line
-        re.sub(r"\s+", "", hota_line)
-        
-        # Extract the second word (HOTA score) before spaces were removed
-        hota_words = hota_line.split()
+        hota_line = output_lines[-12]  # Get the required line
+
+        # Normalize spaces within the line (convert multiple spaces into a single space)
+        hota_line_cleaned = " ".join(hota_line.split())
+
+        # Extract the second word (first numerical value)
+        hota_words = hota_line_cleaned.split()
         if len(hota_words) > 1:
-            hota_score = float(hota_words[1].replace(" ", ""))  # Remove spaces within the score
-            print("HOTA Score:", hota_score)
+            try:
+                hota_score = float(hota_words[1])  # Convert to float
+                print("HOTA Score:", hota_score)
+            except ValueError:
+                print("Error: HOTA score is not a valid number.")
         else:
             print("Error: Unexpected format in HOTA line.")
     else:
         print("Error: Output does not have enough lines.")
-
     print(f"Trial {trial.number} - HOTA Score: {hota_score}")
     return hota_score
 
