@@ -30,7 +30,10 @@ def objective(trial):
         --detector "yolox"
     """
 
-    mv = f"""mv /kaggle/working/BoostTrack/results/trackers/MOT20-val/* /kaggle/working/BoostTrack/results/trackers/MOT20-test/"""
+    
+    mv = f"""mkdir -p /kaggle/working/BoostTrack/results/trackers/MOT20-test && \
+        mv /kaggle/working/BoostTrack/results/trackers/MOT20-val/* /kaggle/working/BoostTrack/results/trackers/MOT20-test/
+    """
 
     print(f"Running trial {trial.number} with params: {params}")
     
