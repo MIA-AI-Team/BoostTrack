@@ -56,12 +56,12 @@ def objective(trial):
         hota_line = output_lines[-12]
         
         # Remove all spaces within the line
-        hota_line_no_spaces = re.sub(r"\s+", "", hota_line)
+        re.sub(r"\s+", "", hota_line)
         
         # Extract the second word (HOTA score) before spaces were removed
         hota_words = hota_line.split()
         if len(hota_words) > 1:
-            hota_score = hota_words[1].replace(" ", "")  # Remove spaces within the score
+            hota_score = float(hota_words[1].replace(" ", ""))  # Remove spaces within the score
             print("HOTA Score:", hota_score)
         else:
             print("Error: Unexpected format in HOTA line.")
