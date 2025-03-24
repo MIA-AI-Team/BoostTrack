@@ -36,6 +36,13 @@ def make_parser():
     # det args
     parser.add_argument("-c", "--ckpt", default=None, type=str, help="ckpt for eval")
     parser.add_argument("--conf", default=0.5, type=float, help="test conf")
+    parser.add_argument("--lambda_iou", default=0.5, type=float, help="Lambda iou")
+    parser.add_argument("--lambda_mhd", default=0.25, type=float, help="Lambda iou")
+    parser.add_argument("--lambda_shape", default=0.25, type=float, help="Lambda iou")
+    parser.add_argument("--dlo_boost_coef", default=0.6, type=float, help="Lambda iou")
+
+    parser.add_argument("--max_age", default=30, type=int, help="Max Age")
+    parser.add_argument("--min_box_area", default=10, type=int, help="Minimum Box Area")
     parser.add_argument("--nms", default=0.7, type=float, help="test nms threshold")
     parser.add_argument("--tsize", default=[800, 1440], nargs="+", type=int, help="test img size")
     parser.add_argument("--seed", default=None, type=int, help="eval seed")

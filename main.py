@@ -56,12 +56,23 @@ def main():
     GeneralSettings.values['use_ecc'] = not args.no_cmc
     GeneralSettings.values['test_dataset'] = args.test_dataset
 
+    GeneralSettings.values['max_age'] = args.max_age
+    GeneralSettings.values['min_hits'] = args.min_hits
+    GeneralSettings.values['det_thresh'] = args.conf
+    GeneralSettings.values['iou_threshold'] = args.iou_thresh
+    GeneralSettings.values['min_box_area'] = args.min_box_area
+
     BoostTrackSettings.values['s_sim_corr'] = args.s_sim_corr
+    
+    BoostTrackSettings.values['lambda_iou'] = args.lambda_iou
+    BoostTrackSettings.values['lambda_mhd'] = args.lambda_mhd
+    BoostTrackSettings.values['lambda_shape'] = args.lambda_shape
+    BoostTrackSettings.values['dlo_boost_coef'] = args.dlo_boost_coef
 
     BoostTrackPlusPlusSettings.values['use_rich_s'] = not args.btpp_arg_iou_boost
     BoostTrackPlusPlusSettings.values['use_sb'] = not args.btpp_arg_no_sb
     BoostTrackPlusPlusSettings.values['use_vt'] = not args.btpp_arg_no_vt
-
+    
     detector_path, size = get_detector_path_and_im_size(args)
     if args.detector == "yolox":
         det = detector.Detector("yolox", detector_path, args.dataset)

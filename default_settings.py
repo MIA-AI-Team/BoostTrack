@@ -12,7 +12,7 @@ def get_detector_path_and_im_size(args) -> Tuple[str, Tuple[int, int]]:
         size = (800, 1440)
     elif args.dataset == "mot20":
         if args.detector == "yoloV11":
-            detector_path = "external/weights/last_80ep.pt"
+            detector_path = "external/weights/yoloV12_30ep_b.pt"
             size = (800, 1440)
         elif args.test_dataset:
             detector_path = "external/weights/mot17x_finetuned.pth.tar"
@@ -80,7 +80,7 @@ class GeneralSettings:
 
 class BoostTrackSettings:
     values: Dict[str, Union[float, bool, int, str]] = {
-        'lambda_iou': 1.2,  # 0 to turn off
+        'lambda_iou': 0.5,  # 0 to turn off
         'lambda_mhd': 0.25,  # 0 to turn off
         'lambda_shape': 0.25,  # 0 to turn off
         'use_dlo_boost': True,  # False to turn off
