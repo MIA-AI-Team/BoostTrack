@@ -19,8 +19,8 @@ class MotChallenge2DBox(_BaseDataset):
         """Default class config values"""
         code_path = utils.get_code_path()
         default_config = {
-            "GT_FOLDER": "/kaggle/working/BoostTrack/results/gt",  # Location of GT data
-            "TRACKERS_FOLDER": "/kaggle/working/BoostTrack/results/trackers",
+            "GT_FOLDER": "kaggle/working/BoostTrack/results/gt",  # Location of GT data
+            "TRACKERS_FOLDER": "kaggle/working/BoostTrack/results/trackers",
             "OUTPUT_FOLDER": None,  # Where to save eval results (if None, same as TRACKERS_FOLDER)
             "TRACKERS_TO_EVAL": None,  # Filenames of trackers to eval (if None, all in folder)
             "CLASSES_TO_EVAL": ["pedestrian"],  # Valid: ['pedestrian']
