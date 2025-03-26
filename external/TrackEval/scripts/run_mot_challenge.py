@@ -117,5 +117,6 @@ if __name__ == "__main__":
         raise Exception("No metrics selected for evaluation")
     res, _ = evaluator.evaluate(dataset_list, metrics_list)
     
+    print(res)
     hota = np.mean(res['MotChallenge2DBox'][setting['tracker']]['COMBINED_SEQ']['pedestrian']['HOTA']['HOTA']).item()
     print(f"HOTASCORE: {hota * 100:.3f}", flush=True)
